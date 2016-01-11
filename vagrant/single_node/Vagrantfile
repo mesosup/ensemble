@@ -15,11 +15,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.network :forwarded_port, guest: 22, host: 2223, id: "ssh"
 
-  # On destroy, remove entries (if any) for the nodes in the host's ssh authorized keys
-  config.trigger.after :destroy do
-    run "ssh-keygen -R #{@machine.name}"
-  end
-
   nodes.each do |entry|
     config.vm.define entry[:hostname] do |node|
       node.vm.hostname = entry[:hostname]

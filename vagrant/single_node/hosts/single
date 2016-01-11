@@ -1,28 +1,28 @@
 # inventory file for 'single' environment
 
 [machines]
-localmesos01 env=test base_data_dir=/data shared_mount=/vagrant
+192.168.2.101 env=test base_data_dir=/data shared_mount=/vagrant
 
 [masters]
-localmesos01
+192.168.2.101
 
 [zookeeper]
-localmesos01 zk_id=1
+192.168.2.101 zk_id=1
 
 [slaves]
-localmesos01
+192.168.2.101
 
 [marathon_servers]
-localmesos01
+192.168.2.101
 
 [docker_registry]
-localmesos01
+192.168.2.101
 
 [single]
-localmesos01
+192.168.2.101
 
 [bamboo_servers]
-localmesos01
+192.168.2.101
 
 [haproxy]
-localmesos01
+192.168.2.101
