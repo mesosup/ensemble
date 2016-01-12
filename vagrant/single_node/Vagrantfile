@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 nodes = [
-  { :hostname => 'localmesos01', :ip => '192.168.2.101', :mem => 4096, :cpus => 1 }
+  { :hostname => 'localmesos01', :ip => '192.168.2.101', :mem => 4096, :cpus => 2 }
 ]
 
 Vagrant.configure(2) do |config|
@@ -14,11 +14,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.network :forwarded_port, guest: 22, host: 2223, id: "ssh"
-
-  # On destroy, remove entries (if any) for the nodes in the host's ssh authorized keys
-  config.trigger.after :destroy do
-    run "ssh-keygen -R #{@machine.name}"
-  end
 
   nodes.each do |entry|
     config.vm.define entry[:hostname] do |node|
