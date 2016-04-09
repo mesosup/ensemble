@@ -1,0 +1,22 @@
+---
+# Tasks for a nginx proxy 
+
+- name: Install nginx packages
+  apt: name="nginx" state=present
+  sudo: yes
+  tags:
+    - packages
+
+- name: Configure nginx conf file
+  template: src=ensemble-proxy.j2 dest=/etc/nginx/sites-available/ensemble-proxy.conf owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - configuration
+
+- name: Create a symlink to start nginx with given configuration 
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  file: src=/etc/nginx/sites-available/ensemble-proxy.conf dest=/etc/nginx/sites-enabled/default state=link
+  notify: restart nginx
+  sudo: yes
+  tags:
+    - configuration
